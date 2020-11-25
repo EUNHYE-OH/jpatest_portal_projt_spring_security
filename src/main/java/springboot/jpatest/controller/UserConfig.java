@@ -36,7 +36,7 @@ public class UserConfig extends WebSecurityConfigurerAdapter {
                 .and().csrf().disable()
                 .formLogin()            //로그인 수행
                 .loginPage("/loginf")
-                .defaultSuccessUrl("/user/student/student")
+                .defaultSuccessUrl("/user/logOn")
                 //.permitAll()
                 .and()
                 .logout()               //로그아웃 수행

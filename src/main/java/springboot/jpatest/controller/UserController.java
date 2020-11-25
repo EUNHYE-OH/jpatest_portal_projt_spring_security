@@ -2,6 +2,8 @@ package springboot.jpatest.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AuthenticationTrustResolver;
+import org.springframework.security.authentication.AuthenticationTrustResolverImpl;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -67,9 +69,15 @@ public class UserController {
         log.info("stID : {} , pw : {}", inputStID, inputPassword);
         Student student = this.studentRepository.findStudent(inputStID, inputPassword);
         if(student != null){
-            HttpSession session = request.getSession(false);
-            session.setAttribute("student",student);
-            return "user/student/student";
+            AuthenticationTrustResolver trustResolver = new AuthenticationTrustResolverImpl();
+            if (trustResolver.isAnonymous(SecurityContextHolder.getContext().getAuthentication())) {
+                // 익명
+                return "user/joinPreForm";
+            }
+            else {
+            // 로그인한 사용자
+                return "user/student/student";
+            }
         }
         return "user/joinPreForm";
     }//login
