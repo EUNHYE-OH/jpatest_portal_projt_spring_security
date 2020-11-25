@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="joinPre" method="post">
+<label>사용자 구분</label>
+<input type="radio" name="auth" value="ROLE_ADMIN,ROLE_USER">학생
+<input type="radio" name="auth" value="ROLE_USER">관리자
+    <input type="submit" value="선택">
+    <input type="reset" value="취소">
+</form>
+</body>
+</html>
